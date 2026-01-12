@@ -3,7 +3,7 @@ package workflow;
 import domain.Notification;
 import strategy.NotificationStrategy;
 
-public abstract class AbstractNotificationSender {
+public abstract class AbstractNotificationSender implements Sender{
     protected final NotificationStrategy strategy;
 
     protected AbstractNotificationSender(NotificationStrategy strategy) {
@@ -11,7 +11,7 @@ public abstract class AbstractNotificationSender {
     }
 
     // final because we dont want this order to change in the subclasses
-    // template method
+    // template method - workflow. Need to decorate this
     public final void sendNotification(Notification notification) {
         validate(notification);
         buildMessage(notification);
@@ -45,3 +45,4 @@ public abstract class AbstractNotificationSender {
         strategy.send(notification);
     }
 }
+// framework and application separation
